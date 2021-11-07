@@ -34,9 +34,10 @@ The `test/PngTest.cpp` file is ugly because its content aggregates the content o
 #include "torch_png/Png.hpp"
 
 int main(int argc, char** argv) {
-  const auto tensor = torch_png::decode("path/to/dir/file.png");
-  // ...
-  torch_png::encode("path/to/dir/file.png");
+  // returns a torch::UInt8 with dims {channels, height, width}
+  const auto image = torch_png::decode("path/to/dir/file.png");
+  // expects a torch::UInt8 with dims {channels, height, width}
+  torch_png::encode("path/to/dir/file.png", image);
   // ...
   const auto batched_tensor = /*some batched tensor with TYPE torch::UInt8 and DIMS {batch, channels, height, width}*/
   /*
@@ -50,6 +51,7 @@ int main(int argc, char** argv) {
    *
    * You may as well choose your own delimiter instead of "_", which is the default one.
    */
+  // expects a torch::UInt8 with dims {batch, channels, height, width}
   torch_png::encode_batch("path/to/dir/filename.png", batched_tensor);
   return 0;
 }
