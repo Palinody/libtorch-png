@@ -37,9 +37,14 @@ find_package(
   roscpp
   torch_png
 )
-```
 
-Also add `torch_png` to your `package.xml`
+target_link_libraries(
+    ${PROJECT_NAME} 
+    # <...>
+    ${LIBPNG_LIBRARIES}
+    ${TORCH_LIBRARIES}
+)
+```
 
 ## Unit tests
 
