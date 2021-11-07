@@ -9,7 +9,6 @@ find_package(
   roscpp
 )
 find_package(PCL REQUIRED)
-find_package(OpenMP)
 find_package(Torch REQUIRED)
 
 catkin_package(
@@ -34,7 +33,7 @@ add_library(
 )
 
 target_link_libraries(
-    ${PROJECT_NAME} ${catkin_LIBRARIES} OpenMP::OpenMP_CXX
+    ${PROJECT_NAME} ${catkin_LIBRARIES}
 )
 
 # test mode: 
