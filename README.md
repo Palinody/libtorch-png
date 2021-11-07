@@ -2,6 +2,8 @@
 
 A ros package tested on ros-melodic for encoding/decoding png images with libtorch `torch::Tensor`.
 
+**This package is intended to be compiled with ros-melodic and catkin but you may as well just take the `include/torch_png/Png.hpp` and `src/Png.cpp` files and compile and link however you want.**
+
 ## Requirements
 
 - c++17
@@ -12,13 +14,32 @@ A ros package tested on ros-melodic for encoding/decoding png images with libtor
 
 - ros-melodic
 
-This package is intended to be compiled with ros-melodic and catkin but you may as well just take the `include/torch_png/Png.hpp` and `src/Png.cpp` files and compile and link however you want.
+## Add it to you ros workspace (example)
+
+```ssh
+$ cd catkin_ws/src/external_libraries
+$ git clone https://github.com/Palinody/libtorch-png
+```
 
 ## Compiling
 
+If you are using ros:
 ```ssh
 $ catkin_make
 ```
+
+## Using the ros package library from another ros package (minimal example)
+
+```ssh
+find_package(
+  catkin REQUIRED COMPONENTS
+  # <...>
+  roscpp
+  torch_png
+)
+```
+
+Also add `torch_png` to your `package.xml`
 
 ## Unit tests
 
@@ -26,7 +47,7 @@ $ catkin_make
 $ catkin_make run_tests_torch_png
 ```
 
-The `test/PngTest.cpp` file is ugly because its content aggregates the content of files from a greater project. It has been included in this repository just to show how the package is intended to be used and how it has been tested. 
+The `test/PngTest.cpp` file is ugly because its content aggregates the content of files from a greater project. It has been included in this repository just to show how the package is intended to be used and how it has been tested. The images are being stored in `/tmp` and immediately deleted upon creation.
 
 ## How to use
 
