@@ -54,6 +54,13 @@ $ catkin_make run_tests_torch_png
 
 The `test/PngTest.cpp` file is ugly because its content aggregates the content of files from a greater project. It has been included in this repository just to show how the package is intended to be used and how it has been tested. The images are being stored in `/tmp` and immediately deleted upon creation.
 
+## Supported image formats
+`torch::kUInt` type only.
+- gray
+- gray alpha
+- rgb
+- rgb alpha
+
 ## How to use
 
 ```c
