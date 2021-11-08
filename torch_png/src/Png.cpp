@@ -252,11 +252,8 @@ void encode_batch(fs::path filepath, const torch::Tensor& tensor, const std::str
         filepath += ext;
         // encode a single image at a time
         encode(filepath, tensor.index({b, idx::Ellipsis}));
-        // reset path to raw path name without extension if no thread
-        // if thread, firstprivate will reset filepath to original value after job
-#ifndef _OPENMP
+        // reset path to raw path name without extension
         filepath = fp_no_ext;
-#endif
     }
 }
 
