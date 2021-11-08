@@ -46,6 +46,16 @@ target_link_libraries(
 )
 ```
 
+Add the package to your `package.xml`
+
+```xml
+<!-- ... -->
+<build_depend>torch_png</build_depend>
+<build_export_depend>torch_png</build_export_depend>
+<exec_depend>torch_png</exec_depend>
+<!-- ... -->
+```
+
 ## Unit tests
 
 ```ssh
