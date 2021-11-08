@@ -16,7 +16,7 @@ A ros package tested on ros-melodic for encoding/decoding png images with libtor
 
 ## Add it to you ros workspace (example)
 
-```ssh
+```sh
 $ cd catkin_ws/src/external_libraries
 $ git clone https://github.com/Palinody/libtorch-png
 ```
@@ -24,13 +24,13 @@ $ git clone https://github.com/Palinody/libtorch-png
 ## Compiling
 
 If you are using ros:
-```ssh
+```sh
 $ catkin_make
 ```
 
 ## Using the ros package library from another ros package (minimal example)
 
-```ssh
+```sh
 find_package(
   catkin REQUIRED COMPONENTS
   # <...>
@@ -58,7 +58,7 @@ Add the package to your `package.xml`
 
 ## Unit tests
 
-```ssh
+```sh
 $ catkin_make run_tests_torch_png
 ```
 
