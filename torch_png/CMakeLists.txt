@@ -8,7 +8,7 @@ find_package(
   catkin REQUIRED COMPONENTS
   roscpp
 )
-find_package(PCL REQUIRED)
+
 find_package(OpenMP)
 find_package(Torch REQUIRED)
 
@@ -18,8 +18,6 @@ catkin_package(
     CATKIN_DEPENDS 
         roscpp 
 )
-
-pkg_check_modules(LIBPNG libpng REQUIRED)
 
 include_directories(
     include 
