@@ -2,6 +2,10 @@
 
 #include <memory>
 
+#ifdef _OPENMP
+#include <omp.h>
+#endif
+
 namespace torch_png {
 
 namespace {
@@ -238,15 +242,21 @@ void encode_batch(fs::path filepath, const torch::Tensor& tensor, const std::str
     const auto ext = filepath.extension();
     // save a copy of (f)ile(p)ath without extension and remove extension from filepath
     const auto fp_no_ext = filepath.replace_extension("");
-    for (std::int64_t b{0}; b < batch; ++b) {
+#ifdef _OPENMP
+#pragma omp parallel for firstprivate(filepath)
+#endif
+    for (std::int64_t b = 0; b < batch; ++b) {
         // append index
         filepath += fs::path(delimiter + std::to_string(b));
         // and extension
         filepath += ext;
         // encode a single image at a time
         encode(filepath, tensor.index({b, idx::Ellipsis}));
-        // reset path to raw path name without extension
+        // reset path to raw path name without extension if no thread
+        // if thread, firstprivate will reset filepath to original value after job
+#ifndef _OPENMP
         filepath = fp_no_ext;
+#endif
     }
 }
 

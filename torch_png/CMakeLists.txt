@@ -2,13 +2,14 @@ cmake_minimum_required(VERSION 3.0.2)
 project(torch_png)
 
 set(CMAKE_CXX_STANDARD 17)
-add_compile_options(-O3 -march=native -Wall -Wfatal-errors)
+add_compile_options(-O3 -march=native -Wall -Wfatal-errors -fopenmp)
 
 find_package(
   catkin REQUIRED COMPONENTS
   roscpp
 )
 find_package(PCL REQUIRED)
+find_package(OpenMP)
 find_package(Torch REQUIRED)
 
 catkin_package(
@@ -33,7 +34,7 @@ add_library(
 )
 
 target_link_libraries(
-    ${PROJECT_NAME} ${catkin_LIBRARIES}
+    ${PROJECT_NAME} ${catkin_LIBRARIES} OpenMP::OpenMP_CXX
 )
 
 # test mode: 
@@ -49,5 +50,6 @@ if(CATKIN_ENABLE_TESTING)
         PngTests
         ${TORCH_LIBRARIES}
         ${LIBPNG_LIBRARIES}
+        OpenMP::OpenMP_CXX
     )
 endif()
